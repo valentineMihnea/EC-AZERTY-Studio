@@ -50,7 +50,6 @@ Codes follow the project specification. Status values: `Planned`, `In progress`,
 | Payments | Stripe (Test Mode + Stripe CLI) |
 | Testing | Vitest / Jest |
 
-The administration panel is written by us, not generated.
 
 ---
 
