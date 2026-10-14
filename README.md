@@ -1,10 +1,6 @@
-# AZERTY Studio — Online store for custom PC keyboards
+# AZERTY Studio - Online store for custom PC keyboards
 
 We sell keyboards, cases, keycaps, switches and accessories.
-
-Developed for the **E-Commerce Course (Semester Project 2026–2027)**.
-
-> **Status: Presentation 1 (Week 3).** This README is the initial version. The requirement table, setup instructions and test accounts will be completed as the project progresses. The final version is delivered at P3.
 
 ---
 ## Team
