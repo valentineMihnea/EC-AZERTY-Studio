@@ -16,6 +16,30 @@ Developed for the **E-Commerce Course (Semester Project 2026–2027)**.
 
 ---
 
+## Requirements status
+ 
+Codes follow the project specification. Status values: `Planned`, `In progress`, `Done`.
+ 
+### Mandatory
+ 
+| Code | Requirement | Status |
+|---|---|---|
+| A1 | Product catalog | Planned |
+| A2 | Basic search | Planned |
+| A3 | Shopping cart | Planned |
+| A4 | User accounts | Planned |
+| A5 | Checkout | Planned |
+| A6 | Sandbox payment | Planned |
+| A7 | Stock management | Planned |
+| A8 | Order history | Planned |
+| A9 | Administration panel | Planned |
+| A10 | Basic security | Planned |
+| A11 | Responsive design | Planned |
+| A12 | Automated tests | Planned |
+
+---
+
+
 ## Technology stack
 
 | Component | Choice |
