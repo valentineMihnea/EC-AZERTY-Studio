@@ -1,0 +1,13 @@
+# Ignore real environment secret files
+.env
+.env.local
+.env.*.local
+
+# Dependencies & Build folders
+node_modules/
+.next/
+dist/
+
+# OS files
+.DS_Store
+Thumbs.db
