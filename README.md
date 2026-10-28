@@ -31,21 +31,53 @@ Codes follow the project specification. Status values: `Planned`, `In progress`,
 | A9 | Administration panel | Planned |
 | A10 | Basic security | Planned |
 | A11 | Responsive design | Planned |
-| A12 | Automated tests | Planned |
+| A12 | Automated tests | In progress |
 
 ---
-
 
 ## Technology stack
 
 | Component | Choice |
 |---|---|
-| Frontend | Next.js (React) + Tailwind CSS + shadcn/ui |
+| Frontend | Next.js (React 19) + Tailwind CSS + shadcn/ui |
 | Backend | Next.js API Routes / Server Actions + Prisma ORM |
 | Database | PostgreSQL (in Docker) |
 | Payments | Stripe (Test Mode + Stripe CLI) |
-| Testing | Vitest / Jest |
+| Testing | Vitest |
 
+---
+
+## Getting Started
+
+### 1. Environment & Database
+```bash
+# Copy environment configuration
+cp .env.example .env
+
+# Start PostgreSQL database with Docker
+docker compose up -d db
+
+# Push Prisma schema and seed 35 keyboard products
+npx prisma db push
+npm run db:seed
+```
+
+### 2. Run Tests (A12)
+```bash
+npm test
+```
+
+### 3. Run Development Server
+```bash
+npm run dev
+# Open http://localhost:3000
+```
+
+---
+
+## Specification Documents (Weeks 4–5 Deliverables)
+- [API Endpoints Specification](docs/api-specification.md)
+- [UI Wireframes & Component Blueprints](docs/wireframes.md)
 
 ---
 
@@ -53,23 +85,27 @@ Codes follow the project specification. Status values: `Planned`, `In progress`,
 
 - Claude Sonnet 5.5
 - Gemini 4 Argon
+- Antigravity Coding Assistant
 
 ---
 
 ## Project structure
 
-> Planned layout, to be updated as the code grows.
-
 ```
 .
-├── prisma/              # schema, migrations, seed script
+├── docs/
+│   ├── api-specification.md # Endpoints, payloads, and contracts
+│   └── wireframes.md        # UI layouts, component blueprints & responsive views
+├── prisma/
+│   ├── schema.prisma        # PostgreSQL relational data model
+│   └── seed.ts              # 35 products (5 categories x 7) + users
 ├── src/
-│   ├── app/             # Next.js pages, API routes and server actions
-│   ├── components/      # UI components (shadcn/ui)
-│   └── lib/             # database client, Stripe, validation, helpers
-├── tests/               # automated tests
-├── docker-compose.yml
-├── .env.example
+│   ├── app/                 # Next.js pages, API routes and server actions
+│   ├── components/          # UI components
+│   └── lib/                 # Database client (Prisma), Stripe, helpers
+├── tests/                   # Automated Vitest suites (A12)
+├── docker-compose.yml       # PostgreSQL & App containers
+├── .env.example             # Configuration template
 └── README.md
 ```
 

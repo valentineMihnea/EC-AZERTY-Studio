@@ -1,0 +1,135 @@
+// Prisma schema for AZERTY Studio
+// Database: PostgreSQL
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  CUSTOMER
+  ADMIN
+}
+
+enum OrderStatus {
+  PENDING
+  PAID
+  PROCESSING
+  SHIPPED
+  CANCELLED
+}
+
+model User {
+  id           String     @id @default(cuid())
+  email        String     @unique
+  passwordHash String
+  name         String?
+  role         Role       @default(CUSTOMER)
+  createdAt    DateTime   @default(now())
+  updatedAt    DateTime   @updatedAt
+  orders       Order[]
+  cartItems    CartItem[]
+
+  @@map("users")
+}
+
+model Category {
+  id          String    @id @default(cuid())
+  name        String    @unique
+  slug        String    @unique
+  description String?
+  imageUrl    String?
+  products    Product[]
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@map("categories")
+}
+
+model Product {
+  id                String      @id @default(cuid())
+  name              String
+  slug              String      @unique
+  description       String
+  price             Int         // Euro cents (e.g. 14999 = €149.99)
+  stock             Int         @default(0)
+  lowStockThreshold Int         @default(5)
+  isFeatured        Boolean     @default(false)
+  categoryId        String
+  category          Category    @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  images            String[]    // Array of image URLs/paths
+  specs             Json        // Key/value technical specifications
+  orderItems        OrderItem[]
+  cartItems         CartItem[]
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+
+  @@index([categoryId])
+  @@index([slug])
+  @@map("products")
+}
+
+model Order {
+  id                    String      @id @default(cuid())
+  orderNumber           String      @unique @default(cuid())
+  userId                String?
+  user                  User?       @relation(fields: [userId], references: [id], onDelete: SetNull)
+  customerEmail         String
+  customerName          String?
+  shippingAddress       Json?
+  status                OrderStatus @default(PENDING)
+  totalAmount           Int         // Euro cents
+  stripePaymentIntentId String?     @unique
+  stripeSessionId       String?     @unique
+  items                 OrderItem[]
+  createdAt             DateTime    @default(now())
+  updatedAt             DateTime    @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String   @id @default(cuid())
+  orderId     String
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId   String
+  product     Product  @relation(fields: [productId], references: [id], onDelete: Restrict)
+  productName String   // Recorded at checkout
+  quantity    Int      @default(1)
+  unitPrice   Int      // In cents at time of order
+  createdAt   DateTime @default(now())
+
+  @@index([orderId])
+  @@index([productId])
+  @@map("order_items")
+}
+
+model CartItem {
+  id        String   @id @default(cuid())
+  sessionId String?  // Guest cart identifier
+  userId    String?  // Authenticated user
+  user      User?    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  product   Product  @relation(fields: [productId], references: [id], onDelete: Cascade)
+  quantity  Int      @default(1)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([sessionId])
+  @@map("cart_items")
+}
+
+model StripeEvent {
+  id          String   @id // Stripe event ID (e.g. evt_123456789)
+  type        String
+  processedAt DateTime @default(now())
+
+  @@map("stripe_events")
+}
