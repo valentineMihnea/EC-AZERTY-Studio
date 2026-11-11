@@ -1,4 +1,5 @@
 import { PrismaClient, Role } from '@prisma/client';
+import bcrypt from 'bcryptjs';
 
 const prisma = new PrismaClient();
 
@@ -15,12 +16,15 @@ async function main() {
   await prisma.stripeEvent.deleteMany();
 
   // 2. Seed Default Users
-  console.log('Creating initial users...');
+  console.log('Creating initial users with hashed credentials...');
+  const adminPasswordHash = bcrypt.hashSync('admin123', 10);
+  const customerPasswordHash = bcrypt.hashSync('customer123', 10);
+
   const admin = await prisma.user.create({
     data: {
       email: 'admin@azertystudio.com',
-      passwordHash: 'admin123', // In production, hashed with bcrypt/argon2
-      name: 'Mihnea (Admin)',
+      passwordHash: adminPasswordHash,
+      name: 'Admin',
       role: Role.ADMIN,
     },
   });
@@ -28,11 +32,12 @@ async function main() {
   const customer = await prisma.user.create({
     data: {
       email: 'customer@azertystudio.com',
-      passwordHash: 'customer123',
+      passwordHash: customerPasswordHash,
       name: 'Alex Gamer',
       role: Role.CUSTOMER,
     },
   });
+  console.log(`Created default users: ${admin.email}, ${customer.email}`);
 
   // 3. Seed 5 Categories
   console.log('Creating 5 categories...');
