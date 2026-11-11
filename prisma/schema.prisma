@@ -20,19 +20,21 @@ enum OrderStatus {
   PAID
   PROCESSING
   SHIPPED
+  DELIVERED
   CANCELLED
 }
 
 model User {
-  id           String     @id @default(cuid())
-  email        String     @unique
-  passwordHash String
-  name         String?
-  role         Role       @default(CUSTOMER)
-  createdAt    DateTime   @default(now())
-  updatedAt    DateTime   @updatedAt
-  orders       Order[]
-  cartItems    CartItem[]
+  id              String     @id @default(cuid())
+  email           String     @unique
+  passwordHash    String
+  name            String?
+  role            Role       @default(CUSTOMER)
+  shippingAddress Json?      // Delivery address per requirement A4
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  orders          Order[]
+  cartItems       CartItem[]
 
   @@map("users")
 }
@@ -132,4 +134,19 @@ model StripeEvent {
   processedAt DateTime @default(now())
 
   @@map("stripe_events")
+}
+
+model DiscountCode {
+  id              String    @id @default(cuid())
+  code            String    @unique
+  discountPercent Int?      // e.g. 10 for 10%
+  discountCents   Int?      // Fixed amount discount in euro cents
+  expiresAt       DateTime?
+  maxUses         Int       @default(100)
+  usedCount       Int       @default(0)
+  isActive        Boolean   @default(true)
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime  @updatedAt
+
+  @@map("discount_codes")
 }

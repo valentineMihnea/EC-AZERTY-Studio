@@ -34,6 +34,17 @@ Codes follow the project specification. Status values: `Planned`, `In progress`,
 | A11  | Responsive design    | Planned     |
 | A12  | Automated tests      | In progress |
 
+### Bonus Features (Approved & Frozen at P2)
+
+| Code | Bonus Feature        | Points | Status      |
+| ---- | -------------------- | ------ | ----------- |
+| B1   | Filtered search      | 5      | In progress |
+| B2   | Recommendations      | 4      | Planned     |
+| B4   | Sales dashboard      | 3      | Planned     |
+| B5   | Discount codes       | 3      | Planned     |
+| B6   | Transactional email  | 5      | Planned     |
+| **Total** | **Max Bonus Capped** | **20** |             |
+
 ---
 
 ## Technology stack
@@ -79,8 +90,11 @@ npm run dev
 
 ---
 
-## Specification Documents (Weeks 4–5 Deliverables)
+## Deliverables & Documentation
 
+- **Presentation 1 (Week 3)**: [AZERTY Studio - Presentation 1.pdf](../AZERTY%20Studio%20-%20Presentation%201.pdf) (Git tag `P1`)
+- **Presentation 2 (Week 7)**: [AZERTY Studio - Presentation 2.pdf](../AZERTY%20Studio%20-%20Presentation%202.pdf) (Git tag `P2`)
+- **Specification Document (Week 7)**: [AZERTY Studio - Specification Document.pdf](../docs/AZERTY%20Studio%20-%20Specification%20Document.pdf)
 - [API Endpoints Specification](docs/api-specification.md)
 - [UI Wireframes & Component Blueprints](docs/wireframes.md)
 
