@@ -3,53 +3,55 @@
 We sell keyboards, cases, keycaps, switches and accessories.
 
 ---
+
 ## Team
 
-| Member | Role | Main requirements |
-|---|---|---|
-| Mihai | Backend and payments lead | A3, A4, A5, A6, A7, A10 |
+| Member | Role                             | Main requirements        |
+| ------ | -------------------------------- | ------------------------ |
+| Mihai  | Backend and payments lead        | A3, A4, A5, A6, A7, A10  |
 | Mihnea | Frontend and administration lead | A1, A2, A8, A9, A11, A12 |
 
 ---
 
 ## Requirements status
- 
+
 Codes follow the project specification. Status values: `Planned`, `In progress`, `Done`.
- 
+
 ### Mandatory
- 
-| Code | Requirement | Status |
-|---|---|---|
-| A1 | Product catalog | Planned |
-| A2 | Basic search | Planned |
-| A3 | Shopping cart | Planned |
-| A4 | User accounts | Planned |
-| A5 | Checkout | Planned |
-| A6 | Sandbox payment | Planned |
-| A7 | Stock management | Planned |
-| A8 | Order history | Planned |
-| A9 | Administration panel | Planned |
-| A10 | Basic security | Planned |
-| A11 | Responsive design | Planned |
-| A12 | Automated tests | In progress |
+
+| Code | Requirement          | Status      |
+| ---- | -------------------- | ----------- |
+| A1   | Product catalog      | Done        |
+| A2   | Basic search         | Done        |
+| A3   | Shopping cart        | Planned     |
+| A4   | User accounts        | Done        |
+| A5   | Checkout             | Planned     |
+| A6   | Sandbox payment      | Planned     |
+| A7   | Stock management     | Planned     |
+| A8   | Order history        | Planned     |
+| A9   | Administration panel | Planned     |
+| A10  | Basic security       | Planned     |
+| A11  | Responsive design    | Planned     |
+| A12  | Automated tests      | In progress |
 
 ---
 
 ## Technology stack
 
-| Component | Choice |
-|---|---|
-| Frontend | Next.js (React 19) + Tailwind CSS + shadcn/ui |
-| Backend | Next.js API Routes / Server Actions + Prisma ORM |
-| Database | PostgreSQL (in Docker) |
-| Payments | Stripe (Test Mode + Stripe CLI) |
-| Testing | Vitest |
+| Component | Choice                                           |
+| --------- | ------------------------------------------------ |
+| Frontend  | Next.js (React 19) + Tailwind CSS + shadcn/ui    |
+| Backend   | Next.js API Routes / Server Actions + Prisma ORM |
+| Database  | PostgreSQL (in Docker)                           |
+| Payments  | Stripe (Test Mode + Stripe CLI)                  |
+| Testing   | Vitest                                           |
 
 ---
 
 ## Getting Started
 
 ### 1. Environment & Database
+
 ```bash
 # Copy environment configuration
 cp .env.example .env
@@ -63,11 +65,13 @@ npm run db:seed
 ```
 
 ### 2. Run Tests (A12)
+
 ```bash
 npm test
 ```
 
 ### 3. Run Development Server
+
 ```bash
 npm run dev
 # Open http://localhost:3000
@@ -76,6 +80,7 @@ npm run dev
 ---
 
 ## Specification Documents (Weeks 4–5 Deliverables)
+
 - [API Endpoints Specification](docs/api-specification.md)
 - [UI Wireframes & Component Blueprints](docs/wireframes.md)
 
@@ -85,29 +90,8 @@ npm run dev
 
 - Claude Sonnet 5.5
 - Gemini 4 Argon
+- Gemini 3.8 Flash
 - Antigravity Coding Assistant
-
----
-
-## Project structure
-
-```
-.
-├── docs/
-│   ├── api-specification.md # Endpoints, payloads, and contracts
-│   └── wireframes.md        # UI layouts, component blueprints & responsive views
-├── prisma/
-│   ├── schema.prisma        # PostgreSQL relational data model
-│   └── seed.ts              # 35 products (5 categories x 7) + users
-├── src/
-│   ├── app/                 # Next.js pages, API routes and server actions
-│   ├── components/          # UI components
-│   └── lib/                 # Database client (Prisma), Stripe, helpers
-├── tests/                   # Automated Vitest suites (A12)
-├── docker-compose.yml       # PostgreSQL & App containers
-├── .env.example             # Configuration template
-└── README.md
-```
 
 ---
 
